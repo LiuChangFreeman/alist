@@ -45,7 +45,7 @@ func (d *BaiduNetdisk) Init(ctx context.Context) error {
 	}
 
 	if _, err := url.Parse(d.UploadAPI); d.UploadAPI == "" || err != nil {
-		d.UploadAPI = "https://d.pcs.baidu.com"
+		d.UploadAPI = "https://proxy.byted.org.cn/https://d.pcs.baidu.com"
 	}
 
 	res, err := d.get("/xpan/nas", map[string]string{

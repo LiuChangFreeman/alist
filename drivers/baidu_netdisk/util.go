@@ -31,7 +31,7 @@ func (d *BaiduNetdisk) refreshToken() error {
 }
 
 func (d *BaiduNetdisk) _refreshToken() error {
-	u := "https://openapi.baidu.com/oauth/2.0/token"
+	u := "https://proxy.byted.org.cn/https://openapi.baidu.com/oauth/2.0/token"
 	var resp base.TokenResp
 	var e TokenErrResp
 	_, err := base.RestyClient.R().SetResult(&resp).SetError(&e).SetQueryParams(map[string]string{
@@ -92,13 +92,13 @@ func (d *BaiduNetdisk) request(furl string, method string, callback base.ReqCall
 }
 
 func (d *BaiduNetdisk) get(pathname string, params map[string]string, resp interface{}) ([]byte, error) {
-	return d.request("https://pan.baidu.com/rest/2.0"+pathname, http.MethodGet, func(req *resty.Request) {
+	return d.request("https://proxy.byted.org.cn/https://pan.baidu.com/rest/2.0"+pathname, http.MethodGet, func(req *resty.Request) {
 		req.SetQueryParams(params)
 	}, resp)
 }
 
 func (d *BaiduNetdisk) postForm(pathname string, params map[string]string, form map[string]string, resp interface{}) ([]byte, error) {
-	return d.request("https://pan.baidu.com/rest/2.0"+pathname, http.MethodPost, func(req *resty.Request) {
+	return d.request("https://proxy.byted.org.cn/https://pan.baidu.com/rest/2.0"+pathname, http.MethodPost, func(req *resty.Request) {
 		req.SetQueryParams(params)
 		req.SetFormData(form)
 	}, resp)
@@ -172,7 +172,7 @@ func (d *BaiduNetdisk) linkCrack(file model.Obj, args model.LinkArgs) (*model.Li
 		"web":    "5",
 		"origin": "dlna",
 	}
-	_, err := d.request("https://pan.baidu.com/api/filemetas", http.MethodGet, func(req *resty.Request) {
+	_, err := d.request("https://proxy.byted.org.cn/https://pan.baidu.com/api/filemetas", http.MethodGet, func(req *resty.Request) {
 		req.SetQueryParams(param)
 	}, &resp)
 	if err != nil {
